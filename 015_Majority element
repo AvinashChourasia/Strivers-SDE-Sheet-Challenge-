@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	
+	public static int findMajority(int[] arr, int n) {
+
+		// Using Moore's voting algorithm
+		int ans = 0;
+		int count = 0;
+		for(int item:arr){
+			if(count==0){
+				ans = item;
+				count++;
+			}
+			else{
+				if(item==ans){
+					count++;
+				}
+				else{
+					count--;
+				}
+			}
+		}
+		count = 0;
+		for(int item:arr){
+			if(item==ans){
+				count++;
+			}
+		}
+		if(count>n/2){
+			return ans;
+		}
+		return -1;
+
+
+
+
+
+		// Using HashMap
+		int k = n/2+1;
+		HashMap<Integer,Integer> h = new HashMap<>();
+		for(int item:arr){
+			h.put(item,h.getOrDefault(item,0)+1);
+			if(h.get(item)==k){
+				return item;
+			}
+		}
+		return -1;
+	}
+
+}
