@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    
+    public static int modularExponentiation(int x, int n, int m) {
+
+        return (int)f((long)x,(long)n,(long)m);
+    }
+
+    public static long f(long x,long n,long m){
+        if(n==0 || x==1){
+            return 1;
+        }
+        if(x==0){
+            return 0;
+        }
+        long sq = f(x,n/2,m);
+        long res = (sq*sq)%m;
+        if(n%2!=0){
+            return (res*x)%m;
+        }
+        return res;
+    }
+
+}
