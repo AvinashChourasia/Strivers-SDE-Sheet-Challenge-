@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static ArrayList<Integer> majorityElementII(ArrayList<Integer> arr){
+
+        // Use HashMap
+        int n = arr.size();
+        int k = n/3 + 1;
+        ArrayList<Integer> ans = new ArrayList<>();
+        Set<Integer> s = new HashSet<>();
+        HashMap<Integer,Integer> h = new HashMap<>();
+        for(int item:arr){
+            h.put(item,h.getOrDefault(item,0)+1);
+            if(h.get(item)>=k && !s.contains(item)){
+                ans.add(item);
+                s.add(item);
+            }
+        }
+        return ans;
+    }
+}
