@@ -1,0 +1,48 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        
+
+        // Approach 1 -> (use array)
+        int ans[] = new int[2];
+        int count[] = new int[n+1];
+        for(int item:arr){
+            count[item]++;
+        }
+        for(int i=1;i<=n;i++){
+            if(count[i]==0){
+                ans[0] = i;
+            }
+            if(count[i]==2){
+                ans[1] = i;
+            }
+        }
+        return ans;
+        
+        // Approach 2 -> using set
+        // int ans[] = new int[2];
+//         Set<Integer> h = new HashSet<>();
+//         for(int item:arr){
+//             if(h.contains(item)){
+//                 ans[1] = item;
+//             }
+//             else{
+//                 h.add(item);
+//             }
+//         }
+//         for(int i=1;i<=n;i++){
+//             if(!h.contains(i)){
+//                 ans[0] = i;
+//                 break;
+//             }
+//         }
+//         return ans;
+
+
+    }
+
+}
