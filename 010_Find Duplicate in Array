@@ -1,0 +1,20 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution{
+    
+    public static int findDuplicate(ArrayList<Integer> arr, int n){
+        
+        Set<Integer> h = new HashSet<>();
+        for(int item:arr){
+            if(h.contains(item)){
+                return item;
+            }
+            h.add(item); 
+        }
+        return 0;
+    }
+
+}
