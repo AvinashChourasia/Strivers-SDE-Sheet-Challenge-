@@ -1,0 +1,22 @@
+public class Solution
+{
+    public static Node removeKthNode(Node head, int k){
+        
+        int count = 0;
+        Node cur = head;
+        while(cur!=null){
+            cur = cur.next;
+            count++;
+        }
+        int n = count-k+1;
+        if(n==1){
+            return head.next;
+        }
+        Node cur1 = head;
+        for(int i=1;i<n-1;i++){
+            cur1 = cur1.next;
+        }
+        cur1.next = cur1.next.next;
+        return head;
+    }
+}
