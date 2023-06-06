@@ -1,0 +1,28 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        
+        int n = intervals.length;
+        Arrays.sort(intervals,(a,b)->(a.start-b.start));
+        ArrayList<Interval> l = new ArrayList<>();
+        int begin = intervals[0].start;
+        int end = intervals[0].finish;
+        for(int i=1;i<n;i++){
+            if(end>=intervals[i].start){
+                end = Math.max(end,intervals[i].finish);
+            }
+            else{
+                l.add(new Interval(begin,end));
+                begin = intervals[i].start;
+                end = intervals[i].finish;
+            }
+        }
+        l.add(new Interval(begin,end));
+        return l;
+    }
+
+
+}
