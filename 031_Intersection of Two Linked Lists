@@ -1,0 +1,33 @@
+public class Solution {
+	public static int findIntersection(LinkedListNode<Integer> firstHead, LinkedListNode<Integer> secondHead) 
+	{
+		if(firstHead==null){
+			return -1;
+		}
+		if(secondHead==null){
+			return -1;
+		}
+		LinkedListNode<Integer> a = firstHead;
+		LinkedListNode<Integer> b = secondHead;
+
+		while(a!=b){
+			if(a!=null){
+				a = a.next;
+			}
+			else{
+				a = secondHead;
+			}
+			if(b!=null){
+				b = b.next;
+			}
+			else{
+				b = firstHead;
+			}
+		}
+		if(a==null){
+			return -1;
+		}
+		return a.data;
+	}
+
+}
