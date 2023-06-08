@@ -1,0 +1,30 @@
+public class Solution {
+	public static LinkedListNode<Integer> cloneRandomList(LinkedListNode<Integer> head) {
+		
+		HashMap<LinkedListNode<Integer>,LinkedListNode<Integer>> h = new HashMap<>();
+		LinkedListNode<Integer> temp = head;
+		while(temp != null) {
+			LinkedListNode<Integer> newNode = new LinkedListNode<Integer>(temp.data);
+			h.put(temp,newNode);
+			temp = temp.next;
+		}
+        LinkedListNode<Integer> t = head;
+		while(t != null) {
+			LinkedListNode<Integer> node = h.get(t);
+			if(t.next!=null){
+				node.next = h.get(t.next);
+			}
+			else{
+				node.next = null;
+			}
+			if(t.random!=null){
+				node.random = h.get(t.random);
+			}
+			else{
+				node.random = null;
+			}
+			t = t.next;
+		}
+		return h.get(head);
+	}
+}
