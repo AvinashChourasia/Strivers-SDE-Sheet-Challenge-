@@ -1,0 +1,53 @@
+public class Solution {
+	public static Node getListAfterReverseOperation(Node head, int n, int b[]) {
+		
+		if(head==null){
+			return null;
+		}
+		if(n==1 && b[0]==0){
+			return head;
+		}
+		Node ans = new Node(0);
+		Node temp = ans;
+		Node cur = head;
+		boolean flag = false;
+		for(int i=0;i<n;i++){
+			int k = b[i];
+			if(k==0){
+				continue;
+			}
+			Node x = cur;
+			while(k>1){
+				x = x.next;
+				k--;
+				if(x.next==null){
+					flag = true;
+					break;
+				}
+			}
+			Node ne = x.next;
+			x.next = null;
+			temp.next = reverse(cur);
+			if(flag==true){
+				return ans.next;
+			}
+			cur.next = ne;
+			temp = cur;
+			cur = ne;
+		}
+		return ans.next;
+	}
+
+	public static Node reverse(Node head){
+		Node prev = null;
+		Node cur = head;
+		while(cur!=null){
+			Node temp = cur.next;
+			cur.next = prev;
+			prev = cur;
+			cur = temp;
+		}
+		return prev;
+	}
+
+}
