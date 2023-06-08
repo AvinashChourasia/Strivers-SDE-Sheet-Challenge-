@@ -1,0 +1,24 @@
+public class Solution {
+    public static Node firstNode(Node head) {
+
+        Node slow = head;
+        Node fast = head;
+        boolean flag = false;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow==fast){
+                flag = true;
+                break;
+            }
+        }
+        if(flag==false){
+            return null;
+        }
+        while(slow!=head){
+            slow = slow.next;
+            head = head.next;
+        }
+        return slow;
+    }
+}
