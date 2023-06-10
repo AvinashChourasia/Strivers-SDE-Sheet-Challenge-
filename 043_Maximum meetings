@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+
+class Pair{
+    int f,s,t;
+    Pair(int f,int s,int t){
+        this.f = f;
+        this.s = s;
+        this.t = t;
+    }
+}
+
+public class Solution {
+    
+    public static List<Integer> maximumMeetings(int[] start, int[] end) {        
+        
+        int n = start.length;
+        List<Integer> ans = new ArrayList<>();
+        ArrayList<Pair> l = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            l.add(new Pair(start[i],end[i],i+1));
+        }
+        Collections.sort(l,Comparator.comparing(o->o.s));
+        int e = -1;
+        for(int i=0;i<n;i++){
+            if(l.get(i).f>e){
+                ans.add(l.get(i).t);
+                e = l.get(i).s;
+            }
+        }
+        return ans;
+    }
+
+}
