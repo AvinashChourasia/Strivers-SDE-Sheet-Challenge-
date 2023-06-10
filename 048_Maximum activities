@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Pair{
+    int f,s;
+    Pair(int f,int s){
+        this.f = f;
+        this.s = s;
+    }
+}
+// class itemComparator implements Comparator<Pair>{
+//     @Override
+//     public int compare(Pair a,Pair b){
+//         if(a.s>b.s){
+//             return 1;
+//         }
+//         return -1;
+//     }
+// }
+
+
+public class Solution {
+    
+    public static int maximumActivities(List<Integer> start, List<Integer> end) {
+        
+        int n = start.size();
+        // Pair arr[] = new Pair[n];
+        ArrayList<Pair> l = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            l.add(new Pair(start.get(i),end.get(i)));
+        }
+        Collections.sort(l,Comparator.comparing(o->o.s));
+        // Arrays.sort(arr,new itemComparator());
+        int e = l.get(0).s;
+        int count = 1;
+        for(int i=1;i<n;i++){
+            if(l.get(i).f>=e){
+                count++;
+                e = l.get(i).s;
+            }
+        }
+        return count;
+    }
+}
