@@ -1,0 +1,22 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+        
+        int n = num.length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        f(n-1,0,num,ans);
+        Collections.sort(ans);
+        return ans;
+    }
+
+    public static void f(int ind,int sum,int num[],ArrayList<Integer> ans){
+        if(ind==-1){
+            ans.add(sum);
+            return;
+        }
+        f(ind-1,sum+num[ind],num,ans);
+        f(ind-1,sum,num,ans);
+    }
+
+}
