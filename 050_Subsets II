@@ -1,0 +1,25 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> uniqueSubsets(int n, int arr[]) {
+        
+        Arrays.sort(arr);
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> l = new ArrayList<>();
+        f(0,l,ans,arr);
+        return ans;
+    }
+
+    public static void f(int ind,ArrayList<Integer> l,ArrayList<ArrayList<Integer>> ans,int arr[]){
+        ans.add(new ArrayList<>(l));
+        for(int i=ind;i<arr.length;i++){
+            if(i>ind && arr[i]==arr[i-1]){
+                continue;
+            }
+            l.add(arr[i]);
+            f(i+1,l,ans,arr);
+            l.remove(l.size()-1);
+        }
+    }
+
+}
