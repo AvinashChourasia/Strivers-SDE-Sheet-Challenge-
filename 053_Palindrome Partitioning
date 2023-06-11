@@ -1,0 +1,41 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    
+    public static List<List<String>> partition(String s) {
+
+        List<List<String>> ans = new ArrayList<>();
+        List<String> l = new ArrayList<>(); 
+        f(0,l,ans,s);
+        return ans;
+    }
+
+    public static void f(int ind,List<String> l,List<List<String>> ans,String s){
+        if(ind==s.length()){
+            ans.add(new ArrayList<>(l));
+            return;
+        }
+        for(int i=ind+1;i<=s.length();i++){
+            String x = s.substring(ind,i);
+            if(isPal(x)){
+                l.add(x);
+                f(i,l,ans,s);
+                l.remove(l.size()-1);
+            }
+        }
+    }
+
+    public static boolean isPal(String s){
+        int low = 0;
+        int high = s.length()-1;
+        while(low<high){
+            if(s.charAt(low)!=s.charAt(high)){
+                return false;
+            }
+            low++;
+            high--;
+        }
+        return true;
+    }
+
+}
