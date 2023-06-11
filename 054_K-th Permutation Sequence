@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+
+public class Solution {
+
+    // Time complexity -> o(n)
+    public static String kthPermutation(int n, int k) {
+        
+        int fact = 1;
+        ArrayList<Integer> l = new ArrayList<>();
+        for(int i=1;i<n;i++){
+            l.add(i);
+            fact*=i; 
+        }
+        l.add(n);
+        String ans = "";
+        k-=1;
+        while(true){
+            ans+=l.get(k/fact);
+            l.remove(k/fact);
+            if(l.size()==0){
+                break;
+            }
+            k%=fact;
+            fact/=l.size();
+        }
+        return ans;
+    }
+
+
+    // Using recursion
+    // public static String kthPermutation(int n, int k) {
+        
+    //     int v[] = new int[n];
+    //     ArrayList<String> l = new ArrayList<>();
+    //     f("",v,l,0);
+    //     return l.get(k-1);
+    // }
+
+    // public static void f(String s,int v[],ArrayList<String> l,int count){
+    //     if(count==v.length){
+    //         l.add(s);
+    //         return;
+    //     }
+    //     for(int i=0;i<v.length;i++){
+    //         if(v[i]==0){
+    //             v[i] = 1;
+    //             s+=(i+1);
+    //             f(s,v,l,count+1);
+    //             s = s.substring(0,s.length()-1);
+    //             v[i] = 0;
+    //         }
+    //     }
+    // }
+
+
+}
