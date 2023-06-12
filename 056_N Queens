@@ -1,0 +1,73 @@
+import java.util.*;
+
+public class Solution {
+    
+    public static ArrayList<ArrayList<Integer>> solveNQueens(int n) {
+        
+        int a[][] = new int[n][n];
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        f(0,n,a,ans);
+        return ans;
+    }
+
+    public static void f(int row,int n,int a[][],ArrayList<ArrayList<Integer>> ans){
+        if(row==n){
+            ArrayList<Integer> l = new ArrayList<>();
+            for(int p=0;p<n;p++){
+                for(int q=0;q<n;q++){
+                    l.add(a[p][q]);
+                }
+            }  
+            ans.add(l);
+            return;
+        }
+        for(int col=0;col<n;col++){
+            if(row==0){
+                a[row][col] = 1;
+                f(row+1,n,a,ans);
+                a[row][col] = 0;
+                continue;
+            }
+            boolean flag = true;
+            for(int i=0;i<row;i++){
+                if(a[i][col]==1){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag==false){
+                continue;
+            }
+            int i=row;
+            int j=col;
+            while(i>=0 && j>=0){
+                if(a[i][j]==1){
+                    flag = false;
+                    break;
+                }
+                i--;
+                j--;
+            }
+            if(flag==false){
+                continue;
+            }
+            i=row;
+            j=col;
+            while(i>=0 && j<n){
+                if(a[i][j]==1){
+                    flag = false;
+                    break;
+                }
+                i--;
+                j++;
+            }
+            if(flag==false){
+                continue;
+            }
+            a[row][col] = 1;
+            f(row+1,n,a,ans);
+            a[row][col] = 0;
+        }
+    }
+
+}
