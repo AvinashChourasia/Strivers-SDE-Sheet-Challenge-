@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    
+    public static List<String> findPermutations(String s) {
+        
+        int n = s.length();
+        int v[] = new int[n];
+        ArrayList<String> l = new ArrayList<>();
+        f(0,v,l,"",s);
+        return l;
+    }
+
+    public static void f(int count,int v[],ArrayList<String> l,String a,String s){
+        if(count==s.length()){
+            l.add(a);
+            return;
+        }
+        for(int i=0;i<s.length();i++){
+            if(v[i]==0){
+                v[i] = 1;
+                a+=s.charAt(i);
+                f(count+1,v,l,a,s);
+                a = a.substring(0,a.length()-1);
+                v[i] = 0;
+            }
+        }
+    }
+
+}
