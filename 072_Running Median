@@ -1,0 +1,35 @@
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Solution {
+
+	public static void findMedian(int arr[])  {
+        
+        PriorityQueue<Integer> mxh = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> mnh = new PriorityQueue<>();
+        for(int i=0;i<arr.length;i++){
+            if(mxh.isEmpty() || mxh.peek()>=arr[i]){
+                mxh.add(arr[i]);
+            }
+            else{
+                mnh.add(arr[i]);
+            }
+            if(mxh.size()>mnh.size()+1){
+                mnh.add(mxh.poll());
+            }
+            else if(mnh.size()>mxh.size()){
+                mxh.add(mnh.poll());
+            }
+
+            if(mxh.size()==mnh.size()){
+                System.out.print((mxh.peek()+mnh.peek())/2 +" ");
+            }
+            else{
+                System.out.print(mxh.peek()+" ");
+            }
+        }
+    }
+
+}
