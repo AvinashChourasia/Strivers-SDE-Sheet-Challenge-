@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.*;
+
+
+public class Solution {
+	
+	public static ArrayList<Integer> kthSmallLarge(ArrayList<Integer> arr, int n, int k) {
+		
+		ArrayList<Integer> ans = new ArrayList<>();
+		PriorityQueue<Integer> l = new PriorityQueue<>();
+		PriorityQueue<Integer> s = new PriorityQueue<>(Collections.reverseOrder());
+		for(int item:arr){
+			l.add(item);
+			s.add(item);
+			if(l.size()>k){
+				l.poll();
+			}
+			if(s.size()>k){
+				s.poll();
+			}
+		}
+		ans.add(s.peek());
+		ans.add(l.peek());
+		return ans;
+	}
+
+}
