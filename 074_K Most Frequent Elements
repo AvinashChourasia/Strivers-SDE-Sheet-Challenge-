@@ -1,0 +1,36 @@
+import java.util.* ;
+import java.io.*; 
+
+class Pair{
+	int f,s;
+	Pair(int f,int s){
+		this.f = f;
+		this.s = s;
+	}
+}
+
+public class Solution {
+
+	public static int[] KMostFrequent(int n, int k, int[] arr) {
+
+		HashMap<Integer,Integer> h = new HashMap<>();
+		for(int item:arr){
+			h.put(item,h.getOrDefault(item,0)+1);
+		}
+		PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->a.f-b.f);
+		for(Map.Entry<Integer,Integer> e:h.entrySet()){
+			pq.add(new Pair(e.getValue(),e.getKey()));
+			while(pq.size()>k){
+				pq.poll();
+			}
+		}
+		int ans[] = new int[k];
+		int i = 0;
+		while(!pq.isEmpty()){
+			ans[i++] = pq.peek().s;
+			pq.poll();
+		}
+		return ans;
+	}
+
+}
