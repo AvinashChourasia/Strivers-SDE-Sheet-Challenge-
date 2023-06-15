@@ -1,0 +1,54 @@
+import java.util.* ;
+import java.io.*; 
+
+class Pair{
+    int f,s;
+    Pair(int f,int s){
+        this.f = f;
+        this.s = s;
+    }
+}
+
+public class Solution {
+
+    static class MinStack {
+
+        Stack<Pair> st;
+        MinStack() {
+            st = new Stack<>();
+
+        }
+
+        void push(int num) {
+            if(st.isEmpty()){
+                st.push(new Pair(num,num));
+            }
+            else{
+                st.push(new Pair(num,Math.min(num,st.peek().s)));
+            }
+        }
+
+        int pop() {
+            if(st.isEmpty()){
+                return -1;
+            }
+            int x = st.peek().f;
+            st.pop();
+            return x;
+        }
+
+        int top() {
+            if(st.isEmpty()){
+                return -1;
+            }
+            return st.peek().f;
+        }
+
+        int getMin() {
+            if(st.isEmpty()){
+                return -1;
+            }
+            return st.peek().s;
+        }
+    }
+}
