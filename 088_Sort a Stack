@@ -1,0 +1,17 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static void sortStack(Stack<Integer> stack) {
+
+		ArrayList<Integer> l = new ArrayList<>();
+		while(!stack.isEmpty()){
+			l.add(stack.pop());
+		}
+		Collections.sort(l);
+		for(int item:l){
+			stack.push(item);
+		}
+	}
+
+}
