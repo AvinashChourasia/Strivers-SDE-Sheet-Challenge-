@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+public class Solution
+{
+    public static int singleNonDuplicate(ArrayList<Integer> arr){
+
+        int n = arr.size();
+        int low = 0;
+        int high = n-1; 
+        while(low<high){
+            int mid = (low+high)/2;
+            if( (mid%2==0 && arr.get(mid)==arr.get(mid+1)) || (mid%2!=0 && arr.get(mid-1)==arr.get(mid))){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
+        }
+        return arr.get(low);
+    }
+
+}
