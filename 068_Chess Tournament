@@ -1,0 +1,33 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+    public static int chessTournament(int[] positions, int n,  int c){
+
+        Arrays.sort(positions);
+        int low = 1;
+        int high = positions[n-1] - positions[0];
+        int ans = low;
+        while(low<=high){
+            int mid = (low+high)/2;
+
+            int count = 1;
+            int start = positions[0];
+            for(int item:positions){
+                if(item-start>=mid){
+                    count++;
+                    start = item;
+                }
+            }
+            if(count>=c){
+                ans = mid;
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+
+}
