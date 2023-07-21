@@ -1,0 +1,38 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    
+    public static long ayushGivesNinjatest(int n, int m, int[] time) {
+
+        long sum = 0;
+        long maxi = 0;
+        for(int item:time){
+            maxi = Math.max(maxi,item);
+            sum+=item;
+        }
+        long low = maxi;
+        long high = sum;
+        long ans = low;
+        while(low<=high){
+            long mid = (low+high)/2;
+            long x = 1;
+            long total = 0;
+            for(int i=0;i<m;i++){
+                total+=time[i];
+                if(total>mid){
+                    x++;
+                    total = time[i];
+                }
+            }
+            if(x<=n){
+                ans = mid;
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    } 
+
+}
