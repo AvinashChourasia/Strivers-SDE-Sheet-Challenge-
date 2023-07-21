@@ -1,0 +1,25 @@
+public class Solution {
+    
+    public static int NthRoot(int n, int m) {
+        
+        int ans = -1;
+        int low = 1;
+        int high = m;
+        while(low<=high){
+            int mid = (low+high)/2;
+            int x = (int)Math.pow(mid,n);
+            if(x==m){
+                ans = mid;
+                break;
+            }
+            else if(x>m){
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+
+}
