@@ -1,0 +1,28 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	
+	public static ArrayList<ArrayList<Integer>> pwset(ArrayList<Integer> arr) {
+		
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+		ArrayList<Integer> l = new ArrayList<>();
+		f(0,arr,ans,l);
+		return ans;
+	}
+
+	public static void f(int i,ArrayList<Integer> arr,ArrayList<ArrayList<Integer>> ans,
+	ArrayList<Integer> l){
+
+		if(i==arr.size()){
+			ans.add(new ArrayList<>(l));
+			return;
+		}
+		l.add(arr.get(i));
+		f(i+1,arr,ans,l);
+		l.remove(l.size()-1);
+		f(i+1,arr,ans,l);
+	}
+
+
+}
+
