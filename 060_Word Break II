@@ -1,0 +1,41 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+	public static ArrayList<String> wordBreak(String s, ArrayList<String> dictionary) {
+
+		Set<String> h = new HashSet<>();
+		for(int i=0;i<dictionary.size();i++){
+			h.add(dictionary.get(i));
+		}
+		int n = s.length();
+		ArrayList<String> ans = new ArrayList<>();
+		ArrayList<String> l = new ArrayList<>();
+		f(0,l,s,ans,h,n);
+		return ans;
+	}
+
+	public static void f(int ind,ArrayList<String> l,String s,ArrayList<String> ans,Set<String> h,int n){
+		if(ind==n){
+			String a = "";
+			for(int i=0;i<l.size()-1;i++){
+				a+=l.get(i);
+				a+=" ";
+			}
+			a+=l.get(l.size()-1);
+			ans.add(a);
+			return;
+		}
+		for(int i=ind+1;i<=n;i++){
+			String x = s.substring(ind,i);
+			if(h.contains(x)){
+				l.add(x);
+				f(i,l,s,ans,h,n);
+				l.remove(l.size()-1);
+			}
+		}
+	}
+
+}
