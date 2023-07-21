@@ -1,0 +1,84 @@
+import java.util.*;
+
+class Node{
+    Node links[] = new Node[2];
+    boolean containsKey(int bit){
+        return (links[bit]!=null);
+    }
+    void put(int bit,Node node){
+        links[bit] = node;
+    }
+    Node get(int bit){
+        return links[bit];
+    }
+}
+
+class Trie{
+    private static Node root;
+    Trie(){
+        root = new Node();
+    }
+    public static void insert(int num){
+        Node node = root;
+        for(int i=31;i>=0;i--){
+            int bit = (num>>i)&1;
+            if(!node.containsKey(bit)){
+                node.put(bit,new Node());
+            }
+            node = node.get(bit);
+        }
+    }
+    public int getMax(int num){
+        Node node = root;
+        int maxNumber = 0;
+        for(int i=31;i>=0;i--){
+            int bit = (num>>i)&1;
+            if(node.containsKey(1-bit)){
+                maxNumber = maxNumber|(1<<i);
+                node = node.get(1-bit);
+            }
+            else{
+                node = node.get(bit);
+            }
+        }
+        return maxNumber;
+    }
+}
+
+public class Solution {
+    public static ArrayList<Integer> maxXorQueries(ArrayList<Integer> arr, ArrayList<ArrayList<Integer>> queries) {
+        
+        Collections.sort(arr);
+        ArrayList<ArrayList<Integer>> offlineQueries = new ArrayList<ArrayList<Integer>>();
+        for(int i=0;i<Q;i++){
+            ArrayList<Integer> l = new ArrayList<>();
+            l.add(queries[i][1]);
+            l.add(queries[i][0]);
+            l.add(i);
+            offlineQueries.add(l);
+        }
+        Collections.sort(offlineQueries,new Comparator<ArrayList<Integer>>(){
+            public int compare(ArrayList<Integer> a,ArrayList<Integer>b){
+                return a.get(0).compareTo(b.get(0));
+            }
+        });
+        int index = 0;
+        Trie obj = new Trie();
+        int ans[] = new int[Q];
+        for(int i=0;i<Q;i++){
+            while(index<N && arr[index]<=offlineQueries.get(i).get(0)){
+                obj.insert(arr[index]);
+                index++;
+            }
+            int queryInd = offlineQueries.get(i).get(2);
+            if(index!=0){
+                ans[queryInd] = obj.getMax(offlineQueries.get(i).get(1));
+            }
+            else{
+                ans[queryInd] = -1;
+            }
+        }
+        return ans;
+
+    }
+}
