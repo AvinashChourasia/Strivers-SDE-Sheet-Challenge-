@@ -1,0 +1,44 @@
+import java.util.*;
+public class Solution {
+    
+    public static int ninjaAndLadoos(int row1[], int row2[], int m, int n, int K) {
+        
+        // use mergesort
+        int a[] = new int[n+m];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while(i<m && j<n){
+            if(row1[i]<=row2[j]){
+                a[k++] = row1[i++];
+            }
+            else{
+                a[k++]= row2[j++];
+            }
+        }
+        while(i<m){
+            a[k++] = row1[i++];
+        }
+        while(j<n){
+            a[k++] = row2[j++];
+        }
+        return a[K-1];
+
+        // Use priority Queue   
+        // PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        // for(int item:row1){
+        //     pq.add(item);
+        //     if(pq.size()>k){
+        //         pq.poll();
+        //     }
+        // }
+        // for(int item:row2){
+        //     pq.add(item);
+        //     if(pq.size()>k){
+        //         pq.poll();
+        //     }
+        // }
+        // return pq.peek();
+    }
+
+}
